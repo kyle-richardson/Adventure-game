@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+import sys
 
 # Declare all the rooms
 
@@ -19,7 +20,7 @@ to north. The smell of gold permeates the air."""),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", ["treasure?", "bag"]),
+earlier adventurers. The only exit is to the south.""", ["treasure", "bag"]),
 }
 
 
@@ -39,8 +40,10 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+print("******START GAME*******")
 
-player = Player("Bob", room["outside"])
+name = input("What is your name, adventurer? ")
+player = Player(name, room["outside"])
 
 # Write a loop that:
 #
@@ -52,20 +55,24 @@ player = Player("Bob", room["outside"])
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-print("******START OF GAME*******")
+print(f"Hi {player.name}. Good luck!")
 
-while (player.room != room["treasure"]):
+while ("bag" not in player.items):
     print("\n**********************\n")
     print(f"You are in room: {player.room.name}\n")
+    print(f"{player.room.desc}\n")
     print(
         f"You look around and see the following items in the room: {player.room.items}\n")
     print(f"You are holding the following items: {player.items}\n")
     print("**********************\n")
     x = input(
-        "Enter N,S,E, or W to attempt to move to another room, or interact with items with 'get [item]' or 'drop [item]' commands: ")
+        "Enter N,S,E, or W to attempt to move to another room, or interact with items with 'get [item]' or 'drop [item]' commands (q to quit the game): ")
     print("\n")
     lowerCase = str(x).lower()
-    if lowerCase == "n" or lowerCase == "s" or lowerCase == "e" or lowerCase == "w":
+    if lowerCase == "q":
+        print("You suddenly fall down, unconscious.  Then you slowly disappear. Farewell, stranger.")
+        sys.exit("*****END GAME*****")
+    elif lowerCase == "n" or lowerCase == "s" or lowerCase == "e" or lowerCase == "w":
         y = f'{lowerCase}_to'
         print(f"Starting to move {x}...")
         if getattr(player.room, y):
@@ -79,6 +86,8 @@ while (player.room != room["treasure"]):
             if itemName in player.room.items:
                 player.pickupItem(itemName)
                 print(f'{player.name} picked up {itemName}')
+                if itemName == 'treasure':
+                    print("You dust off the treasure chest, and find ancient engravings.  Your heart races as you slowly open the chest... Suddenly, your vision blacks out, and you writhe in pain on the floor for what seems like hours before it finally subsides.  You look around and wipe your face only to realize that the treasure chest was booby trapped with a poison gas! Good thing you are still alive.  Well, seems like this quest for trasure was a hoax.")
             else:
                 print(f"{itemName} is not found in this room. Try again.")
         else:
@@ -96,4 +105,6 @@ while (player.room != room["treasure"]):
     else:
         print("Invalid input.  Try again.")
 
-print("You made it to the Treasure Room! Congratulations.  However, the treasure is in another castle. womp womp. :(")
+print(
+    f"You open the small bag and find a marvelous diamond.  This looks like it is worth a fortune! Good work, {player.name}. Now, don't forget to come back and tip me when you're all rich and stuff. I mean, I did help you quite a bit. ... pretty please?")
+print("*****END GAME*****")

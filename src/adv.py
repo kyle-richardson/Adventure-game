@@ -19,8 +19,7 @@ the distance, but there is no way across the chasm.""", ["twig", "rock"]),
 to north. The smell of gold permeates the air."""),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
-chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", ["treasure", "bag"]),
+chamber! The only exit is to the south.""", ["treasure", "bag"]),
 }
 
 
@@ -87,7 +86,7 @@ while ("bag" not in player.items):
                 player.pickupItem(itemName)
                 print(f'{player.name} picked up {itemName}')
                 if itemName == 'treasure':
-                    print("You dust off the treasure chest, and find ancient engravings.  Your heart races as you slowly open the chest... Suddenly, your vision blacks out, and you writhe in pain on the floor for what seems like hours before it finally subsides.  You look around and wipe your face only to realize that the treasure chest was booby trapped with a poison gas! Good thing you are still alive.  Well, seems like this quest for trasure was a hoax.")
+                    print("You dust off the treasure chest, and find ancient engravings.  Your heart races as you slowly open the chest... Suddenly, your vision blacks out, and you writhe in pain on the floor for what seems like hours before it finally subsides.  You look around and wipe your face only to realize that the treasure chest was booby trapped with a poison gas! Good thing you are still alive.  Well, it seems like this quest for treasure was a hoax.")
             else:
                 print(f"{itemName} is not found in this room. Try again.")
         else:

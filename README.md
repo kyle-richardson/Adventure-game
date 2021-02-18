@@ -9,3 +9,9 @@
 3. Follow the prompts to enter your name and begin your adventure.
 
 #### Objective: Find the treasure. Have fun!
+
+### Developed by:
+ 
+ Kyle Richardson
+  - [LinkedIn](https://www.linkedin.com/in/kyle-m-richardson/)
+  - [Github](https://github.com/kyle-richardson/)
